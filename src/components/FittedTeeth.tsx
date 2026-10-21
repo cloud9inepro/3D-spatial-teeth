@@ -8,6 +8,7 @@ import { useMemo } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { hoveredToothAtom, registryAtom, toggleToothAtom } from "../state/atoms";
 import TeethGlow from "./TeethGlow";
+import { toothInfo } from "../data/toothLabels";
 
 
 const TARGET_WIDTH = 6
@@ -23,7 +24,7 @@ const idByUuid = useMemo(
   [registry]
 );
 
-
+// [1, 8, 9, 16, 17, 24, 25, 32].forEach((id) => console.log(id, toothInfo(id).label));
 
     useLayoutEffect(()=>{
       const g = ref.current;

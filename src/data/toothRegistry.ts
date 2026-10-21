@@ -58,7 +58,7 @@ function orderArch(items: Item[]): Item[] {
 
   const first = seq[0];
   const dot = (first.c.x - cx) * rx + (first.c.z - cz) * rz;
-  if (dot > 0) seq.reverse(); // index 0 must sit on the patient's right
+  if (dot < 0) seq.reverse(); // index 0 must sit on the patient's right
 
   return seq;
 }
