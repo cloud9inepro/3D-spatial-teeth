@@ -32,6 +32,9 @@ const CLINICAL = [
   "third molar",
 ];
 
+
+
+
 export interface ToothInfo {
   quadrant: Quadrant;
   position: number; // 1 = nearest the middle, 8 = wisdom tooth
@@ -46,6 +49,12 @@ export function toothInfo(id: number): ToothInfo {
     quadrant === 2 ? id - 8 :
     quadrant === 3 ? 25 - id :
     id - 24;
+
+if (id > 32) {
+  const quadrant = (id - 32) as Quadrant;
+  const label = `${QUADRANT_NAME[quadrant]} gum`;
+  return { quadrant, position: 0, label, clinical: label };
+}
 
   return {
     quadrant,

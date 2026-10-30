@@ -14,6 +14,8 @@ export const severityAtom = atom<ReadonlyMap<number, number>>(
   new Map<number, number>()
 );
 
+export const doneAtom = atom(false);
+
 export const activeToothAtom = atom<number | null>(null);
 
 export const stepAtom = atom<0 | 1 | 2>(0);
@@ -43,41 +45,19 @@ export const togglePainTypeAtom = atom(null, (get, set, type: PainType) => {
   set(painTypesAtom, next);
 });
 
-
-
-    //this toggle lets the tooth carry severity slider to next pain
-
-// export const toggleToothAtom = atom(null, (get, set, id: number) => {
-//   const selected = new Set(get(selectedTeethAtom));
-//   const severity = new Map(get(severityAtom));
-//   const painTypes = new Map(get(painTypesAtom));
-
-//   if (selected.has(id)) {
-//     selected.delete(id);
-//     severity.delete(id);
-//     painTypes.delete(id);
-//     if (get(activeToothAtom) === id) {
-//       const remaining = Array.from(selected);
-//       set(activeToothAtom, remaining.length ? remaining[remaining.length - 1] : null);
-//     }
-//   } else {
-//     const prev = get(activeToothAtom);
-//     selected.add(id);
-//     if (prev !== null) {
-//       const sev = severity.get(prev);
-//       if (sev !== undefined) severity.set(id, sev);
-//       const types = painTypes.get(prev);
-//       if (types) painTypes.set(id, new Set(types));
-//     }
-//     set(activeToothAtom, id);
-//   }
-
-//   set(selectedTeethAtom, selected);
-//   set(severityAtom, severity);
-//   set(painTypesAtom, painTypes);
-// });
+export const resetAllAtom = atom(null, (_get, set) => {
+  set(selectedTeethAtom, new Set<number>());
+  set(severityAtom, new Map<number, number>());
+  set(painTypesAtom, new Map<number, ReadonlySet<PainType>>());
+  set(activeToothAtom, null);
+  set(onsetAtom, null);
+  set(triggersAtom, new Set<TriggerId>());
+  set(stepAtom, 0);
+  set(doneAtom, false);
+});
 
 export const toggleToothAtom = atom(null, (get, set, id: number) => {
+  if (get(doneAtom)) return;
   const selected = new Set(get(selectedTeethAtom));
   const severity = new Map(get(severityAtom));
   const painTypes = new Map(get(painTypesAtom));

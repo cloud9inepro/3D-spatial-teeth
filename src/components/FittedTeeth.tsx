@@ -50,14 +50,14 @@ const idByUuid = useMemo(
       teeth.forEach((t) => {
   t.mesh.material = (t.mesh.material as THREE.MeshStandardMaterial).clone();
 });
-      // console.table(
-      //   teeth.map((t) => ({id: t.id, arch: t.arch, q: t.quadrant, type: t.type, node: t.mesh.name}))
-      // );
-      // teeth.forEach((t) => {
-      //   const m = (t.mesh.material as THREE.MeshStandardMaterial).clone();
-      //   m.color.setHSL(t.id / 32, 0.7, 0.6);
-      //   t.mesh.material = m
-      // })
+
+//       const GUM_DEBUG = ["#ff0000", "#00ff00", "#0000ff", "#ffff00"];
+// teeth
+//   .filter((t) => t.type === "gum")
+//   .forEach((t) => {
+//     (t.mesh.material as THREE.MeshStandardMaterial).color.set(GUM_DEBUG[t.id - 33]);
+//   });
+
     }, [setRegistry])
 
 

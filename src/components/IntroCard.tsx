@@ -10,7 +10,7 @@ const ZOOM =
 
 const TIPS = [
   { d: ROTATE, text: "Drag to turn the teeth" },
-  { d: TAP, text: "Tap a tooth that hurts. Tap it again to remove it." },
+  { d: TAP, text: "Tap a tooth or gum that hurts. Tap it again to remove it." },
   { d: ZOOM, text: "Pinch or scroll to zoom in" },
 ];
 

@@ -3,6 +3,7 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import {
   activeToothAtom,
   clearSelectionAtom,
+  doneAtom,
   onsetAtom,
   selectedTeethAtom,
   severityAtom,
@@ -14,8 +15,13 @@ import { TIER_COLOR, tierOf } from "../data/severity";
 import SeveritySlider from "./SeveritySlider";
 import PainTypeButtons from "./PainTypeButtons";
 import HistoryForm from "./HistoryForm";
+// import { useIntakePayload } from "../state/usePayload";
+import Summary from "./Summary";
+
 
 const STEPS = ["Select", "Describe", "History"];
+
+
 
 const HEADINGS = [
   { title: "Where does it hurt?", sub: "Tap the teeth that are bothering you." },
@@ -32,7 +38,12 @@ export default function Panel() {
   const toggle = useSetAtom(toggleToothAtom);
   const clear = useSetAtom(clearSelectionAtom);
   const [step, setStep] = useAtom(stepAtom);
+  // const payload = useIntakePayload();
+  const done = useAtomValue(doneAtom);
+const setDone = useSetAtom(doneAtom);
 
+
+  
   const ids = Array.from(selected).sort((a, b) => a - b);
   const unrated = ids.filter((id) => !severity.has(id));
   const current = ids.length === 0 ? 0 : step;
@@ -53,12 +64,21 @@ export default function Panel() {
       ? "Choose when it started to finish"
       : "";
 
-  const goNext = () => {
-    if (current < 2) setStep((current + 1) as 0 | 1 | 2);
-    // Done: output comes in a later step
-  };
-
+  // const goNext = () => {
+  //   if (current < 2) setStep((current + 1) as 0 | 1 | 2);
+  //   // Done: output comes in a later step
+  // };
+//   const goNext = () => {
+//   if (current < 2) setStep((current + 1) as 0 | 1 | 2);
+//   else console.log(JSON.stringify(payload, null, 2));
+// };
+const goNext = () => {
+  if (current < 2) setStep((current + 1) as 0 | 1 | 2);
+  else setDone(true);
+};
+  if (done) return <Summary />;
   const chips = (
+    
     <ul className="flex flex-wrap gap-2">
       {ids.map((id) => {
         const { label } = toothInfo(id);
