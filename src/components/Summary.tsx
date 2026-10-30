@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useSetAtom } from "jotai";
 import { doneAtom, resetAllAtom } from "../state/atoms";
-import { useIntakePayload } from "../state/usePayload";
+import { useIntakePayload } from "../state/usePayLoad";
 import { toothInfo } from "../data/toothLabels";
 import { PAIN_TYPES } from "../data/painTypes";
 import { TIER_COLOR, TIER_LABEL } from "../data/severity";
+import Credits from "./Credits";
 
 export default function Summary() {
   const payload = useIntakePayload();
@@ -111,6 +112,7 @@ export default function Summary() {
             {copied ? "Copied" : "Copy JSON"}
           </button>
         </details>
+        <Credits/>
       </div>
 
       <footer className="flex shrink-0 gap-3 border-t border-stone-200 bg-stone-50 px-5 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">

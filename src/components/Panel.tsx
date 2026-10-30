@@ -17,6 +17,7 @@ import PainTypeButtons from "./PainTypeButtons";
 import HistoryForm from "./HistoryForm";
 // import { useIntakePayload } from "../state/usePayload";
 import Summary from "./Summary";
+import Credits from "./Credits";
 
 
 const STEPS = ["Select", "Describe", "History"];
@@ -185,6 +186,7 @@ const goNext = () => {
         )}
 
         {current === 2 && <HistoryForm />}
+        <Credits/>
       </div>
 
       <footer className="shrink-0 border-t border-stone-200 bg-stone-50 px-5 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
